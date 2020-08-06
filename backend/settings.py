@@ -87,11 +87,11 @@ WSGI_APPLICATION = 'backend.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': DB_USER,
+        'NAME': "storr",
         'USER': DB_USER,
         'PASSWORD': DB_PASSWORD,
         'HOST': 'localhost',
-        'PORT': '5432',
+        'PORT': "5432",
     }
 }
 
