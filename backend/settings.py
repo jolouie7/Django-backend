@@ -46,9 +46,19 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
+    'django.contrib.sites',
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
+    # 'cosrheaders',
+    'rest_auth',
+    'rest_auth.registration',
+    "rest_framework",
+    'rest_framework.authtoken',
     "inventory_app.apps.InventoryAppConfig",
-    "rest_framework"
 ]
+
+SITE_ID = 1
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -133,3 +143,5 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
 STATIC_URL = '/static/'
+ACCOUNT_USERNAME_REQUIRED = False
+ACCOUNT_EMAIL_VERIFICATION = 'none' #don't know if this works
