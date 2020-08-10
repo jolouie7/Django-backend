@@ -52,15 +52,80 @@ def categoryDelete(request, pk):
 
 # Get all items
 @api_view(["GET"])
-def allItems(request):
+def itemList(request):
   items = Item.objects.all()
   serializer = ItemSerializer(items, many=True)
   return Response(serializer.data)
 
+# get one item
+@api_view(["GET"])
+def itemDetail(request, pk):
+  item = Item.objects.get(id=pk)
+  serializer = ItemSerializer(item, many=False)
+  return Response(serializer.data)
+
+# create a item
+@api_view(["POST"])
+def itemCreate(request):
+  serializer = ItemSerializer(data=request.data)
+  if serializer.is_valid():
+    serializer.save()
+  return Response(serializer.data)
+
+# update an item
+@api_view(["POST"])
+def itemUpdate(request, pk):
+  item = Item.objects.get(id=pk)
+  serializer = ItemSerializer(instance=item, data=request.data)
+  if serializer.is_valid():
+    serializer.save()
+  return Response(serializer.data)
+
+# delete an item
+@api_view(["DELETE"])
+def itemDelete(request, pk):
+  item = Item.objects.get(id=pk)
+  item.delete()
+  return Response("Item has been successfully deleted!")
+
 # Get all users
 @api_view(["GET"])
-def allUsers(request):
+def userList(request):
   users = User.objects.all()
   serializer = UserSerializer(users, many=True)
   return Response(serializer.data)
 
+# get one user
+@api_view(["GET"])
+def userDetail(request, pk):
+  user = User.objects.get(id=pk)
+  serializer = UserSerializer(user, many=False)
+  return Response(serializer.data)
+
+# create a category
+@api_view(["POST"])
+def userCreate(request):
+  serializer = UserSerializer(data=request.data)
+
+  if serializer.is_valid():
+    serializer.save()
+
+  return Response(serializer.data)
+
+# update a category
+@api_view(["POST"])
+def userUpdate(request, pk):
+  user = User.objects.get(id=pk)
+  serializer = UserSerializer(instance=user, data=request.data)
+
+  if serializer.is_valid():
+    serializer.save()
+
+  return Response(serializer.data)
+
+# delete one category
+@api_view(["DELETE"])
+def userDelete(request, pk):
+  user = User.objects.get(id=pk)
+  user.delete()
+  return Response("User successfully deleted!")
